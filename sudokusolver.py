@@ -172,19 +172,19 @@ def readCommand( argv ):
 	args['solverParams'] =  options.solverParams
 	return args	
 
-if __name__=="__main__":
 	"""
+if __name__=="__main__":
 	The main function called when sudokusolver.py is run from the command line:
 	> python sudokusolver.py
 
 	See the usage string for more details.
 
 	> python sudokusolver.py --help
-    """
 	args = readCommand( sys.argv[1:] ) # Get the arguments from the command line input
 	solvers = {'sa': sa_solver,	'ga': ga_solver }  # Dictionary of available solvers
 	
 	solvers[args['solver']]( args['puzzle'], args['solverParams'] )  # Call the solver method passing the string of parameters
 	
 	pass
+    """
 
