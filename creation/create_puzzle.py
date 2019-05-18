@@ -1,4 +1,8 @@
 
+import json
+from os import path
+
+
 def get_squares():
     digits = '123456789'
     rows   = 'ABCDEFGHI'
@@ -6,10 +10,12 @@ def get_squares():
     squares = [a+b for a in rows for b in cols]
     return squares
 
+
 def create_dict_puzzle(grid):
     chars = [c for c in grid if c in '123456789' or c == '0']
     squares = get_squares()
     return dict(zip(squares, chars))
+
 
 def display(sudoku):
     squares = get_squares()
@@ -21,14 +27,15 @@ def display(sudoku):
             print(line)
     print('\n')
 
+
 def read_puzzle(filename):
-    with open(filename,"r") as fd: 
+    with open(path.join(path.dirname(__file__), filename),"r") as fd: 
         array = fd.readline()    
-    puzzle = []
-    for row in array:
-       for col in row:
-           puzzle.append(str(col))
-    fd.close()
+        puzzle = []
+        for row in array:
+            for col in row:
+                puzzle.append(str(col))
+        fd.close()
     return puzzle
 
 def create_puzzle(filename):
