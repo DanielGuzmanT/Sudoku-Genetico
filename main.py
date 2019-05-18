@@ -1,4 +1,7 @@
-from creation.create_puzzle import create_puzzle
+from creation.res.sudoku.puzzle import create_puzzle, display
+from creation.res.genetic.population import create_population
+
 if __name__ == "__main__":
-    # fd = open("puzzleA.txt","r+")
-    create_puzzle('puzzleA.txt')
+    puzzle = create_puzzle('puzzleA.txt')    
+    population = create_population(puzzle=puzzle, num=5)
+    display(puzzle)

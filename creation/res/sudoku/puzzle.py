@@ -38,10 +38,9 @@ def read_puzzle(filename):
         fd.close()
     return puzzle
 
+
 def create_puzzle(filename):
     puzzle_values = read_puzzle(filename) 
-    puzzle_dict = create_dict_puzzle(puzzle_values)    
-    display(puzzle_dict)
-
-if __name__ == "__main__":
-    create_puzzle("puzzleB.txt")
+    puzzle_dict = create_dict_puzzle(puzzle_values)
+    return puzzle_dict
+    # display(puzzle_dict)
