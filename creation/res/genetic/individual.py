@@ -5,8 +5,9 @@ class Individual:
         self.chromosome = chromosome
         self.fitness = -1
 
-    
-    def crossover_single(self):
+
+    def crossover_single_point(self):
+        
         pass
 
 
