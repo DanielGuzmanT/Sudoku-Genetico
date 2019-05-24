@@ -16,9 +16,9 @@ def compete(population):
     return fittest if r > selection_rate else weakest
     
 
-
 def select_parents_tournament(population):
     parent1 = compete(population)
     parent2 = compete(population)    
 
     return (parent1, parent2)
+

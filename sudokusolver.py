@@ -51,7 +51,8 @@ def score_board(puzzle):
 def make_neighborBoard(puzzle, initialEntries):
     new_data = deepcopy(puzzle)
     block = randint(0,8)  # escoje un bloque aleatoriamente
-    num_in_block = len(get_block_indices(block,initialEntries,ignore_originals=True)) #cantidad de ´posiciones que se puede mover en el bloque 
+	 #cantidad de ´posiciones que se puede mover en el bloque 
+    num_in_block = len(get_block_indices(block,initialEntries,ignore_originals=True))
     random_squares = sample(range(num_in_block),2)
     square1, square2 = [get_block_indices(block,initialEntries,ignore_originals=True)[ind] for ind in random_squares]
     new_data[square1], new_data[square2] = new_data[square2], new_data[square1]

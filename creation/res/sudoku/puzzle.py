@@ -1,7 +1,5 @@
-
 import json
 from os import path
-
 
 def get_squares():
     digits = '123456789'
@@ -43,4 +41,3 @@ def create_puzzle(filename):
     puzzle_values = read_puzzle(filename) 
     puzzle_dict = create_dict_puzzle(puzzle_values)
     return puzzle_dict
-    # display(puzzle_dict)

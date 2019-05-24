@@ -1,4 +1,4 @@
 
 def select_survivors(population, offspring, numsurvivors):
-    pass
+    survivors = sorted(range(len(population)), key = lambda i: population[i].fitness, reverse = True)[:numsurvivors]
     return survivors

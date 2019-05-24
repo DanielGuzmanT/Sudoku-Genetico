@@ -5,5 +5,4 @@ def fitness_sudoku(chromosome):
     for unit in unitlist:  # rows units, cols units, squares units
         values = [chromosome[ind] for ind in unit]
         fit += len(set(values))
-
     return fit
