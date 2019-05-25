@@ -44,6 +44,9 @@ def genetic_algorithm(population, invariants, numInd, ngen=100, pmut=0.1, crosso
                     offspring[index] = offspring[index].mutate_position(invariants) 
                 if mutation == 'swap': 
                     offspring[index] = offspring[index].mutate_swap(invariants)
+                if mutation == 'newswap': 
+                    offspring[index] = offspring[index].mutate_new_swap(invariants)
+
         # evaluar offspring 
         evaluate_population(population=offspring, fitness_fn=fitness_fn)
         # seleccionar sobrevivientes

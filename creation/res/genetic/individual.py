@@ -1,6 +1,6 @@
 
-from random import randrange,randint,uniform
-from ..sudoku.units import rows_units
+from random import randrange,randint,uniform,sample
+from ..sudoku.units import rows_units, cols_units, squares_units
 
 class Individual:
     
@@ -49,14 +49,38 @@ class Individual:
     def mutate_swap(self, invariants):
         mutated_ind = Individual(self.chromosome)
         
-        indexes = [i for i in range(9)]
-        row_indx_1 = randint(0, len(indexes)-1)
-        indexes.pop(row_indx_1)
-        row_indx_2 = randint(0, len(indexes)-1)
+        row_indx_1,row_indx_2 = sample(range(9),2)
 
         row1 = rows_units[row_indx_1]
         row2 = rows_units[row_indx_2]
         for i in range(9): 
             if row1[i] not in invariants and row2[i] not in invariants:
-                mutated_ind.chromosome[row1[i]], mutated_ind.chromosome[row2[i]] = mutated_ind.chromosome[row2[i]], mutated_ind.chromosome[row1[i]]
+                mutated_ind.chromosome[row1[i]], mutated_ind.chromosome[row2[i]] = mutated_ind.chromosome[row2[i]], mutated_ind.chromosome[row1[i]]      
         return mutated_ind
+
+
+    def swap_block(self, unit, invariants): 
+        mutated_ind = Individual(self.chromosome)
+        index_gen  = randint(0,8)
+        keys_gen = unit[index_gen]
+        while True: 
+            sw_indx_1, sw_indx_2 = sample(range(9),2)
+            if keys_gen[sw_indx_1] not in invariants and keys_gen[sw_indx_2] not in invariants:
+                mutated_ind.chromosome[keys_gen[sw_indx_1]],mutated_ind.chromosome[keys_gen[sw_indx_2]] = mutated_ind.chromosome[keys_gen[sw_indx_2]],mutated_ind.chromosome[keys_gen[sw_indx_1]]
+                return mutated_ind 
+
+
+    def mutate_new_swap(self,invariants): 
+        prob = uniform(0,1)
+        #rows 
+        if prob <= 0.33:
+            return self.swap_block(rows_units,invariants)
+        #column
+        elif prob > 0.33 and prob <= 0.66: 
+            return self.swap_block(cols_units,invariants)
+        #block
+        else: 
+            return self.swap_block(squares_units,invariants)
+
+        
+
