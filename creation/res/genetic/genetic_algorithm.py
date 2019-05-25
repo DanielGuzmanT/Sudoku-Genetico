@@ -34,23 +34,23 @@ def genetic_algorithm(namefile, numInd, ngen=100, pmut=0.1, crossover="onepoint"
                 offspring.extend(parents[0].crossover_single_point(parents[1]))
         
         # mutacion -> realiza una copia o trabaja con la misma referencia?
-        for individual in offspring:
+        """for individual in offspring:
             if uniform(0, 1) < pmut: 
                 if mutation == "position":
                     continue
-                    # individual = individual.mutate_position(invariants) 
+                    # individual = individual.mutate_position(invariants) """
 
         # evaluar offspring 
         evaluate_population(population=offspring, fitness_fn=fitness_fn)
         # seleccionar sobrevivientes
         population = select_survivors(population=population, offspring= offspring, numsurvivors= len(population))
         new_best_ind = sorted(range(len(population)), key = lambda i: population[i].fitness, reverse = True)[0]
-        if(new_best_ind.fitness > best_ind): 
-            best_ind = new_best_ind
+        if(new_best_ind > best_ind[0]): 
+            best_ind[0] = new_best_ind
             best_gen = gen
     
     print('Mejor individuo de la poblacion final\n')
-    display(best_ind.chromosome)
+    display(population[best_ind[0]].chromosome)
     return best_ind
 
     
