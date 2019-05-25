@@ -21,11 +21,11 @@ def genetic_algorithm(namefile, numInd, ngen=100, pmut=0.1, crossover="onepoint"
     print(best_ind)
     best_gen = 0
     print('Mejor individuo de la poblacion inicial\n')
-    display(best_ind.chromosome)
+    display(population[best_ind[0]].chromosome)
 
     for gen in range(ngen):
         mating_pool = [] 
-        for _ in range(len(population) / 2): mating_pool.append(select_parents_tournament(population))
+        for _ in range(len(population) // 2): mating_pool.append(select_parents_tournament(population))
         
         offspring = []
         # cruzamiento
@@ -37,7 +37,8 @@ def genetic_algorithm(namefile, numInd, ngen=100, pmut=0.1, crossover="onepoint"
         for individual in offspring:
             if uniform(0, 1) < pmut: 
                 if mutation == "position":
-                    individual = individual.mutate_position(invariants) 
+                    continue
+                    # individual = individual.mutate_position(invariants) 
 
         # evaluar offspring 
         evaluate_population(population=offspring, fitness_fn=fitness_fn)

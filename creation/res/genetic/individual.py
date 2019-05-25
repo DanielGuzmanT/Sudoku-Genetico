@@ -10,8 +10,11 @@ class Individual:
 
     def crossover_single_point(self, other_ind):
         point = randrange(len(self.chromosome))
-        ind1 = Individual(self.chromosome[:point] + other_ind.chromosome[point:])
-        ind2 = Individual(other_ind.chromosome[:point] + self.chromosome[point:])
+        chromo1_list = sorted(self.chromosome.items())
+        chromo2_list = sorted(other_ind.chromosome.items())
+        
+        ind1 = Individual(dict(chromo1_list[:point] + chromo2_list[point:]))
+        ind2 = Individual(dict(chromo2_list[:point] + chromo1_list[point:]))
         return [ind1, ind2]  
 
     def crossover_uniform(self):
@@ -19,14 +22,14 @@ class Individual:
 
 
     def mutate_position(self, invariants):
-        mutated_ind = Individual(self.chromosome)
+       """ mutated_ind = Individual(self.chromosome)
         index = randint(0, len(rows_units)-1)
         
         for key in rows_units[index]: 
             if key not in invariants:
-                mutated_ind[key] = str(randint(1, 9))
+                mutated_ind[key] = str(randint(1, 9))"""
                 
-        return mutated_ind
+        # return self pass
 
 
     def mutate_swap(self):
