@@ -86,6 +86,7 @@ def sa_solver(puzzle, strParameters):
 	parameters.update(parms_passed)  # Update  parameters with the passed values
 	
 	start_time = time.time()
+
 	print ('Simulated Annealing intentará resolver el siguiente puzzle: ')
 	showPuzzle(puzzle)
 	
@@ -118,7 +119,9 @@ def sa_solver(puzzle, strParameters):
 			t += 1
 		except:
 			print("Numerical error occurred. It's a random algorithm so try again.")         
+	
 	end_time = time.time() 
+
 	if best_score == -162:
 		print ("Solution:")
 		showPuzzle(puzzle)

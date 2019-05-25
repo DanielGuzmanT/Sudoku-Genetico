@@ -23,7 +23,6 @@ def display(sudoku):
         print(''.join(sudoku[r+c].center(width)+('|' if c in '36' else '') for c in '123456789'))
         if r in 'CF': 
             print(line)
-    print('\n')
 
 
 def read_puzzle(filename):

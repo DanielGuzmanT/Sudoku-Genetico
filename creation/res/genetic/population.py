@@ -5,10 +5,10 @@ from random import randint
 
 def create_population(puzzle, num=10):
     chromosomes = [deepcopy(puzzle) for i in range(num)]
-    invariants  = [k for k,v in puzzle.items() if v=='0']
+    variants  = [k for k,v in puzzle.items() if v =='0']
 
     for chromo in chromosomes:
-        for ind in invariants:
+        for ind in variants:
             chromo[ind] = str(randint(1, 9))
 
     return [Individual(chromo) for chromo in chromosomes]
