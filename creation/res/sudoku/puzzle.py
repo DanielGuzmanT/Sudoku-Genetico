@@ -26,7 +26,7 @@ def display(sudoku):
 
 
 def read_puzzle(filename):
-    with open(path.join(path.dirname(__file__), filename),"r") as fd: 
+    with open((filename),"r") as fd: 
         array = fd.readline()    
         puzzle = []
         for row in array:
