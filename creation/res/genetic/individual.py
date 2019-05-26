@@ -1,6 +1,7 @@
 
 from random import randrange,randint,uniform,sample
 from ..sudoku.units import rows_units, cols_units, squares_units
+from creation.res.genetic.fitness import fitness_peer
 
 class Individual:
     
@@ -35,6 +36,34 @@ class Individual:
         ind2 = Individual(chromosome2)
         return [ind1, ind2] 
 
+    def crossover_new(self,other_ind): 
+        #basado en APLICACIÓN DE TÉCNICAS DE OPTIMIZACIÓN COMBINATORIAL
+        chromosome1 = {}
+        chromosome2 = {}
+        # para el primer chromosoma se escogen los mejores squares
+        for square in squares_units:
+            if(fitness_peer(self.chromosome,square) > fitness_peer(other_ind.chromosome,square)): 
+                for key in square: chromosome1[key] = self.chromosome[key]
+            else: 
+                for key in square: chromosome1[key] = other_ind.chromosome[key]
+        
+        # para el segundo los mejores rows o columns 
+        if uniform(0,1) < 0.5: 
+            for row in rows_units: 
+                if(fitness_peer(self.chromosome,row) > fitness_peer(other_ind.chromosome,row)): 
+                    for key in row: chromosome2[key] = self.chromosome[key]
+                else: 
+                    for key in row: chromosome2[key] = other_ind.chromosome[key]
+        else: 
+            for col in cols_units: 
+                if(fitness_peer(self.chromosome,col) > fitness_peer(other_ind.chromosome,col)): 
+                    for key in col: chromosome2[key] = self.chromosome[key]
+                else: 
+                    for key in col: chromosome2[key] = other_ind.chromosome[key]
+
+        ind1 = Individual(chromosome1)
+        ind2 = Individual(chromosome2)
+        return [ind1, ind2] 
 
     def mutate_position(self, invariants):
         mutated_ind = Individual(self.chromosome)

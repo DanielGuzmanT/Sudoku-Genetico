@@ -22,3 +22,29 @@ def select_parents_tournament(population):
 
     return (parent1, parent2)
 
+
+def select_parents_roulette(population):
+    """Seleccion por roulette, basado en el algoritmo nqueens"""
+    popsize = len(population)
+    
+    # Seleccion del primer padre
+    sumfitness = sum([individual.fitness for individual in population])  # suma total del fitness de la poblacion
+    pickfitness = uniform(0, sumfitness)   
+    cumfitness = 0     
+    for i in range(popsize):
+        cumfitness += population[i].fitness
+        if cumfitness > pickfitness: 
+            iParent1 = i
+            break
+
+    # Seleccion del segundo padre
+    sumfitness = sumfitness - population[iParent1].fitness # retira el fitness del padre ya escogido
+    pickfitness = uniform(0, sumfitness)   
+    cumfitness = 0     
+    for i in range(popsize):
+        if i == iParent1: continue   # si es el primer padre 
+        cumfitness += population[i].fitness
+        if cumfitness > pickfitness: 
+            iParent2 = i
+            break        
+    return (population[iParent1], population[iParent2])

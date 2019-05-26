@@ -6,3 +6,7 @@ def fitness_sudoku(chromosome):
         values = [chromosome[ind] for ind in unit]
         fit += len(set(values))
     return fit
+
+def fitness_peer(chromosome, unit):
+    values = [chromosome[key] for key in unit]
+    return len(set(values))
