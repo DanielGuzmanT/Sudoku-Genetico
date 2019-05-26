@@ -21,7 +21,7 @@ def get_best_ind(population):
 def genetic_algorithm(population, invariants, numInd, ngen=100, pmut=0.1, crossover="onepoint", mutation="position", selection="tournament", fitness_fn=fitness_sudoku):  
     
     best_ind = get_best_ind(population)
-    best_gen = 0
+    best_gen, n_pop_init = 0, len(population)
     
     print('Mejor individuo de la poblacion inicial\n')
     display(best_ind.chromosome)
@@ -79,9 +79,9 @@ def genetic_algorithm(population, invariants, numInd, ngen=100, pmut=0.1, crosso
     print('Mejor individuo de la poblacion final\n')
     display(best_ind.chromosome)
     print('Fitness: {}'.format(best_ind.fitness))
-    print('Generacion: {}'.format(best_gen))
-    
-    print(f"Llamadas scoreboard: {best_gen * numInd}")
+    print('Generacion: {}'.format(best_gen+1))
+    n_calls = (best_gen+1) * numInd + n_pop_init
+    print(f"Llamadas scoreboard: {n_calls}")
 
     print('\nTiempo: {}'.format(end_time-start_time))
     return best_ind
