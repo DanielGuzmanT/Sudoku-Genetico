@@ -65,15 +65,27 @@ class Individual:
         ind2 = Individual(chromosome2)
         return [ind1, ind2] 
 
-    def mutate_position(self, invariants):
+    def mutate_element(self, unit, invariants):
         mutated_ind = Individual(self.chromosome)
-        index = randint(0, len(rows_units)-1)
-        
-        for key in rows_units[index]: 
-            if key not in invariants:
-                mutated_ind.chromosome[key] = str(randint(1, 9))                
-        
-        return mutated_ind
+        index_gen  = randint(0, len(unit)-1)
+        while True: 
+            index_element = randint(0,8)
+            keys_gen = unit[index_gen]
+            if keys_gen[index_element] not in invariants:
+                mutated_ind.chromosome[keys_gen[index_element]]=str(randint(1, 9))    
+                return mutated_ind
+    
+    def mutate_position(self, invariants):
+        prob = uniform(0,1)
+        #rows 
+        if prob <= 0.33:
+            return self.mutate_element(rows_units,invariants)
+        #column
+        elif prob > 0.33 and prob <= 0.66:
+           return self.mutate_element(cols_units,invariants)
+        #block
+        else: 
+           return self.mutate_element(squares_units,invariants)
 
     def mutate_swap(self, invariants):
         mutated_ind = Individual(self.chromosome)
@@ -99,7 +111,7 @@ class Individual:
                 return mutated_ind 
 
 
-    def mutate_new_swap(self,invariants): 
+    def mutate_new_swap(self,unit,invariants): 
         prob = uniform(0,1)
         #rows 
         if prob <= 0.33:
@@ -111,5 +123,9 @@ class Individual:
         else: 
             return self.swap_block(squares_units,invariants)
 
+    
+                
+            
+ 
         
 
