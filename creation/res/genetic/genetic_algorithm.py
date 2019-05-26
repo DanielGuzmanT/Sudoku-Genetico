@@ -36,16 +36,19 @@ def genetic_algorithm(population, invariants, numInd, ngen=100, pmut=0.1, crosso
             for _ in range(len(population) // 2): mating_pool.append(select_parents_tournament(population))
         elif selection == 'roulette':
             for _ in range(len(population) // 2): mating_pool.append(select_parents_roulette(population))
-       
-        offspring = []
-        # cruzamiento
-        for parents in mating_pool:
-            if(crossover == 'onepoint'):
-                offspring.extend(parents[0].crossover_single_point(parents[1]))
-            elif(crossover == 'uniform'): 
-                offspring.extend(parents[0].crossover_uniform(parents[1]))
-            elif(crossover == 'newcross'): 
-                offspring.extend(parents[0].crossover_new(parents[1]))
+        
+        if pmut == 1.0:
+            offspring = population
+        else:
+            offspring = []
+            # cruzamiento
+            for parents in mating_pool:
+                if(crossover == 'onepoint'):
+                    offspring.extend(parents[0].crossover_single_point(parents[1]))
+                elif(crossover == 'uniform'): 
+                    offspring.extend(parents[0].crossover_uniform(parents[1]))
+                elif(crossover == 'newcross'): 
+                    offspring.extend(parents[0].crossover_new(parents[1]))
         # mutacion 
         for index in range(len(offspring)):
             if uniform(0, 1) < pmut: 
