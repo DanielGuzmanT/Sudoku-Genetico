@@ -51,7 +51,8 @@ def score_board(puzzle):
 def make_neighborBoard(puzzle, initialEntries):
     new_data = deepcopy(puzzle)
     block = randint(0,8)  # escoje un bloque aleatoriamente
-    num_in_block = len(get_block_indices(block,initialEntries,ignore_originals=True)) #cantidad de ´posiciones que se puede mover en el bloque 
+	 #cantidad de ´posiciones que se puede mover en el bloque 
+    num_in_block = len(get_block_indices(block,initialEntries,ignore_originals=True))
     random_squares = sample(range(num_in_block),2)
     square1, square2 = [get_block_indices(block,initialEntries,ignore_originals=True)[ind] for ind in random_squares]
     new_data[square1], new_data[square2] = new_data[square2], new_data[square1]
@@ -85,6 +86,7 @@ def sa_solver(puzzle, strParameters):
 	parameters.update(parms_passed)  # Update  parameters with the passed values
 	
 	start_time = time.time()
+
 	print ('Simulated Annealing intentará resolver el siguiente puzzle: ')
 	showPuzzle(puzzle)
 	
@@ -117,7 +119,9 @@ def sa_solver(puzzle, strParameters):
 			t += 1
 		except:
 			print("Numerical error occurred. It's a random algorithm so try again.")         
+	
 	end_time = time.time() 
+
 	if best_score == -162:
 		print ("Solution:")
 		showPuzzle(puzzle)
@@ -172,19 +176,19 @@ def readCommand( argv ):
 	args['solverParams'] =  options.solverParams
 	return args	
 
-if __name__=="__main__":
 	"""
+if __name__=="__main__":
 	The main function called when sudokusolver.py is run from the command line:
 	> python sudokusolver.py
 
 	See the usage string for more details.
 
 	> python sudokusolver.py --help
-    """
 	args = readCommand( sys.argv[1:] ) # Get the arguments from the command line input
 	solvers = {'sa': sa_solver,	'ga': ga_solver }  # Dictionary of available solvers
 	
 	solvers[args['solver']]( args['puzzle'], args['solverParams'] )  # Call the solver method passing the string of parameters
 	
 	pass
+    """
 
